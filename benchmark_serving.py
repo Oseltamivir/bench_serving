@@ -672,7 +672,9 @@ async def benchmark(
         async with semaphore:
             return await request_func(request_func_input=request_func_input,
                                       pbar=pbar)
-    time.sleep(10)
+    time.sleep(20)
+    print(f"DEBUG: MOE_DEBUG_LOG = {os.environ.get('MOE_DEBUG_LOG', 'NOT SET')}")
+    print(f"DEBUG: RESULT_FILENAME = {os.environ.get('RESULT_FILENAME', 'NOT SET')}")
     # Write benchmark start marker to logs (Python equivalent of shell marker())
     try:
         ts_str = datetime.now().isoformat(timespec="seconds")

@@ -672,7 +672,6 @@ async def benchmark(
         async with semaphore:
             return await request_func(request_func_input=request_func_input,
                                       pbar=pbar)
-    time.sleep(20)
     # Write benchmark start marker to logs (Python equivalent of shell marker())
     try:
         ts_str = datetime.now().isoformat(timespec="seconds")

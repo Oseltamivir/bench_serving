@@ -673,8 +673,6 @@ async def benchmark(
             return await request_func(request_func_input=request_func_input,
                                       pbar=pbar)
     time.sleep(20)
-    print(f"DEBUG: MOE_DEBUG_LOG = {os.environ.get('MOE_DEBUG_LOG', 'NOT SET')}")
-    print(f"DEBUG: RESULT_FILENAME = {os.environ.get('RESULT_FILENAME', 'NOT SET')}")
     # Write benchmark start marker to logs (Python equivalent of shell marker())
     try:
         ts_str = datetime.now().isoformat(timespec="seconds")
@@ -683,21 +681,12 @@ async def benchmark(
         ts_str = datetime.now().isoformat()
     _line = f"[{ts_str}] [MARK] benchmark start\n"
 
-    _server_log = os.environ.get("SERVER_LOG")
-    if _server_log:
-        try:
-            with open(_server_log, "a", encoding="utf-8") as f:
-                f.write(_line)
-        except Exception:
-            pass
-
-    _moe_debug_log = os.environ.get("MOE_DEBUG_LOG")
-    if _moe_debug_log:
-        try:
-            with open(_moe_debug_log, "a", encoding="utf-8") as f:
-                f.write(_line)
-        except Exception:
-            pass
+    _moe_debug_log = "/workspace/moe_debug.tp0.log"
+    try:
+        with open(_moe_debug_log, "a", encoding="utf-8") as f:
+            f.write(_line)
+    except Exception:
+        pass
 
     _result_filename = os.environ.get("RESULT_FILENAME", "")
     _markers_path = f"/workspace/markers_{_result_filename}.log"

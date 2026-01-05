@@ -640,7 +640,7 @@ async def benchmark(
                                          output_len=test_output_len,
                                          logprobs=logprobs,
                                          best_of=best_of,
-                                         extra_body={"num_steps": 5, "merge_profiles": True, "profile_by_stage": True},
+                                         extra_body={"num_steps": 2, "merge_profiles": True, "profile_by_stage": True},
                                          multi_modal_content=test_mm_content,
                                          ignore_eos=ignore_eos)
         profile_output = await request_func(request_func_input=profile_input)
